@@ -19,6 +19,13 @@ public class Word {
         return follows;
     }
     
-    
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(word).append(": ");
+        for (Follow follow : follows) {
+            builder.append(follow.toString()).append(", ");
+        }
+        return builder.substring(0, builder.length()); 
+    }
 }
 
