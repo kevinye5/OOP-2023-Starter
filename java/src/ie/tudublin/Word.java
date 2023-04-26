@@ -25,7 +25,7 @@ public class Word {
         for (Follow follow : follows) {
             builder.append(follow.toString()).append(", ");
         }
-        return builder.substring(0, builder.length()); 
+        return builder.substring(0, builder.length() - 2); // Remove the trailing comma and space
     }
 }
 
