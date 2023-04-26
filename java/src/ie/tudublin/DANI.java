@@ -6,6 +6,34 @@ import processing.core.PApplet;
 
 public class DANI extends PApplet {
 
+	private ArrayList<String> words; //stores all words in the document
+
+	public DANI() {
+        this.words = new ArrayList<>(); //constructor
+    }
+
+	public void loadFile(String filename) {
+        String[] lines = loadStrings(filename); // loads the textfile into string array
+        for (String line : lines) {
+            String[] tokens = split(line, ' '); //splits in an array of words instead of lines
+            for (String token : tokens) {
+                String word = token.replaceAll("[^\\w\\s]",""); //removes any punctuation
+                if (word.length() > 0) {
+                    word = word.toLowerCase();  //switches the start of the words to lower
+                    if (!findWord(word)) {
+                        this.words.add(word);
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean findWord(String str) {
+        return this.words.contains(str); //see if the word exists in array with contain function
+    }
+
+	
+
 	
 
 	public void settings() {
@@ -41,4 +69,6 @@ public class DANI extends PApplet {
         textAlign(CENTER, CENTER);
         
 	}
+	
+	
 }

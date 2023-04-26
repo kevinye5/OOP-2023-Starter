@@ -8,17 +8,35 @@ public class Word {
     
     public Word(String word, ArrayList<Follow> follows) {
         this.word = word;
-        this.follows = follows;
+        this.follows = follows;     //constructor
     }
     
     public String getWord() {
-        return word;
+        return word;        //assessor
     }
     
     public ArrayList<Follow> getFollows() {
-        return follows;
+        return follows; // assessor
+    }
+
+    public Follow findFollow(String str) {
+        for (Follow follow : this.follows) {
+            if (follow.getWord().equals(str)) {
+                return follow;
+            }
+        }
+        return null;
     }
     
-   
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(word).append(": ");
+        for (Follow follow : follows) {
+            builder.append(follow.toString()).append(", ");
+        }
+        return builder.substring(0, builder.length() - 2); //the minus 2 stops the trailing comma and space from being counted
+    }
+
+    
 }
 
