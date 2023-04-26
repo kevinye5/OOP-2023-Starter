@@ -1,6 +1,7 @@
 package ie.tudublin;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import processing.core.PApplet;
 
@@ -56,9 +57,8 @@ public class DANI extends PApplet {
 
     String[] sonnet;
 
-    public String[] writeSonnet() {
-        return null;
-    }
+
+
 
 
     public void keyPressed() {
@@ -75,6 +75,48 @@ public class DANI extends PApplet {
         textAlign(CENTER, CENTER);
 
     }
+
+	public String writeSonnet() {
+		StringBuilder sonnetBuilder = new StringBuilder();
+		Random rand = new Random();
+	
+		for (int i = 0; i < 14; i++) {
+			int sentenceLength = 0;
+			String sentence = "";
+	
+			while (sentenceLength < 8) {
+				// pick a random word
+				String word = words.get(rand.nextInt(words.size()));
+	
+				// find its follows
+				ArrayList<String> follows = new ArrayList<>();
+				for (int j = 0; j < words.size() - 1; j++) {
+					if (words.get(j).equals(word)) {
+						follows.add(words.get(j + 1));
+					}
+				}
+	
+				// if there are no follows, finish the sentence
+				if (follows.size() == 0) {
+					break;
+				}
+	
+				// pick a random follow word and add it to the sentence
+				String follow = follows.get(rand.nextInt(follows.size()));
+				sentence += follow + " ";
+				sentenceLength++;
+			}
+	
+			// capitalize the first letter of the sentence and add it to the sonnet
+			sonnetBuilder.append(Character.toUpperCase(sentence.charAt(0)) + sentence.substring(1));
+			sonnetBuilder.append("\n");
+		}
+	
+		return sonnetBuilder.toString();
+
+		
+	}
+	
 
 
 }
